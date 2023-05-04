@@ -86,3 +86,74 @@ public class DanhSachSinhVien {
 ```
 
 Bạn có thể tạo một JUnit test để kiểm tra các phương thức thêm, sửa và xoá trong lớp DanhSachSinhVien. Bạn có muốn biết thêm chi tiết về cách viết JUnit test không?
+
+Có.
+
+
+Dưới đây là một ví dụ về cách viết JUnit test để kiểm tra các phương thức thêm, sửa và xoá trong lớp DanhSachSinhVien:
+
+```java
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class DanhSachSinhVienTest {
+
+    @Test
+
+    public void testThem() {
+
+        DanhSachSinhVien ds = new DanhSachSinhVien();
+
+        SinhVien sv = new SinhVien("Nguyen Van A", 20);
+
+        ds.them(sv);
+
+        assertEquals(1, ds.danhSach.size());
+
+        assertEquals(sv, ds.danhSach.get(0));
+
+    }
+
+    @Test
+
+    public void testSua() {
+
+        DanhSachSinhVien ds = new DanhSachSinhVien();
+
+        SinhVien sv1 = new SinhVien("Nguyen Van A", 20);
+
+        ds.them(sv1);
+
+        SinhVien sv2 = new SinhVien("Nguyen Van B", 21);
+
+        ds.sua(sv1, sv2);
+
+        assertEquals(1, ds.danhSach.size());
+
+        assertEquals(sv2, ds.danhSach.get(0));
+
+    }
+
+    @Test
+
+    public void testXoa() {
+
+        DanhSachSinhVien ds = new DanhSachSinhVien();
+
+        SinhVien sv = new SinhVien("Nguyen Van A", 20);
+
+        ds.them(sv);
+
+        ds.xoa(sv);
+
+        assertTrue(ds.danhSach.isEmpty());
+
+    }
+
+}
+
+```
+
+Bạn có thể chạy các test trên bằng cách sử dụng JUnit. Bạn có muốn biết thêm chi tiết về cách cài đặt và sử dụng JUnit không?
