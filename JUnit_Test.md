@@ -1,4 +1,4 @@
-
+# Thêm Xoá Sửa
 Dưới đây là một ví dụ về cách tạo đối tượng SinhVien và danh sách đối tượng SinhVien trong Java:
 
 ```java
@@ -157,3 +157,202 @@ public class DanhSachSinhVienTest {
 ```
 
 Bạn có thể chạy các test trên bằng cách sử dụng JUnit. Bạn có muốn biết thêm chi tiết về cách cài đặt và sử dụng JUnit không?
+
+# Nhập Xuất File
+Dưới đây là một ví dụ về cách tạo đối tượng SinhVien và danh sách đối tượng SinhVien, nhập và xuất file, và tạo JUnit Test kiểm tra nhập và xuất file trong Java:
+
+```java
+
+import java.io.*;
+
+import java.util.*;
+
+class SinhVien {
+
+    private String ten;
+
+    private int tuoi;
+
+    public SinhVien(String ten, int tuoi) {
+
+        this.ten = ten;
+
+        this.tuoi = tuoi;
+
+    }
+
+    public String getTen() {
+
+        return ten;
+
+    }
+
+    public void setTen(String ten) {
+
+        this.ten = ten;
+
+    }
+
+    public int getTuoi() {
+
+        return tuoi;
+
+    }
+
+    public void setTuoi(int tuoi) {
+
+        this.tuoi = tuoi;
+
+    }
+
+}
+
+public class SinhVienTest {
+
+    public static void main(String[] args) {
+
+        // Tạo danh sách đối tượng SinhVien
+
+        ArrayList<SinhVien> sinhViens = new ArrayList<>();
+
+        sinhViens.add(new SinhVien("Nguyen Van A", 20));
+
+        sinhViens.add(new SinhVien("Tran Thi B", 21));
+
+        // Xuất danh sách đối tượng SinhVien ra file
+
+        try (FileWriter writer = new FileWriter("sinhvien.txt")) {
+
+            for (SinhVien sinhVien : sinhViens) {
+
+                writer.write(sinhVien.getTen() + "," + sinhVien.getTuoi() + "\n");
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        // Nhập danh sách đối tượng SinhVien từ file
+
+        ArrayList<SinhVien> sinhViensFromFile = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("sinhvien.txt"))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] parts = line.split(",");
+
+                String ten = parts[0];
+
+                int tuoi = Integer.parseInt(parts[1]);
+
+                sinhViensFromFile.add(new SinhVien(ten, tuoi));
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        // In ra danh sách đối tượng SinhVien từ file
+
+        for (SinhVien sinhVien : sinhViensFromFile) {
+
+            System.out.println(sinhVien.getTen() + " - " + sinhVien.getTuoi());
+
+        }
+
+    }
+
+}
+
+```
+
+```java
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+public class SinhVienTestTest {
+
+    @Test
+
+    public void testNhapXuatFile() {
+
+        // Tạo danh sách đối tượng SinhVien
+
+        ArrayList<SinhVien> sinhViens = new ArrayList<>();
+
+        sinhViens.add(new SinhVien("Nguyen Van A", 20));
+
+        sinhViens.add(new SinhVien("Tran Thi B", 21));
+
+        // Xuất danh sách đối tượng SinhVien ra file
+
+        try (FileWriter writer = new FileWriter("sinhvien.txt")) {
+
+            for (SinhVien sinhVien : sinhViens) {
+
+                writer.write(sinhVien.getTen() + "," + sinhVien.getTuoi() + "\n");
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        // Nhập danh sách đối tượng SinhVien từ file
+
+        ArrayList<SinhVien> sinhViensFromFile = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("sinhvien.txt"))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                String[] parts = line.split(",");
+
+                String ten = parts[0];
+
+                int tuoi = Integer.parseInt(parts[1]);
+
+                sinhViensFromFile.add(new SinhVien(ten, tuoi));
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        // Kiểm tra xem danh sách đối tượng SinhVien từ file có giống với danh sách ban đầu hay không
+
+        assertEquals(sinhViens.size(), sinhViensFromFile.size());
+
+        for (int i = 0; i < sinhViens.size(); i++) {
+
+            assertEquals(sinhViens.get(i).getTen(), sinhViensFromFile.get(i).getTen());
+
+            assertEquals(sinhViens.get(i).getTuoi(), sinhViensFromFile.get(i).getTuoi());
+
+        }
+
+    }
+
+}
+
+```
+
+Hy vọng ví dụ trên sẽ gi
